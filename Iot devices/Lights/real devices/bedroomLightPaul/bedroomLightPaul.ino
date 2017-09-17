@@ -5,22 +5,21 @@
 #define LightPin 4
 
 
-const char* ssid     = "Camerloher2";
+const char* ssid     = "Camerloher";
 const char* password = "E7yLwS3S5J";
 
 WiFiUDP Server;
-unsigned int UDPPort = 51234;
+unsigned int UDPPort = 51234;file:///d%3A/Cloud%20Storages/Nextcloud/Paul/Projekte/homecontrol/API/light/control-save.php
 
 const char server_ip[]="10.0.0.255";
 
-const int packetSize = 7;
-byte packetBuffer[packetSize];
 
-const String turnOnSignal = "#0001";
-const String turnOffSignal = "#0002";
-const String sendIAmHereSiganl = "#0003";
-const String serverCommand ="+iamh+";
-const String stationName="Schlafzimmer Paul";
+
+const String turnOnSignal = "10000";
+const String turnOffSignal = "20000";
+const String sendIAmHereSiganl = "0000000000";
+const String serverCommand ="ima+";
+const String stationName="Schlafzimmer-Paul";
 
 
 
@@ -70,44 +69,46 @@ void loop() {
 
 void handleUDPServer() {
   int cb = Server.parsePacket();
+ 
   if (cb) {
-    Server.read(packetBuffer, packetSize);
+    byte packetBuffer[cb];
+    Server.read(packetBuffer, cb);
     String data = ""; 
-    for(int i = 0; i < packetSize; i++) {
+    for(int i = 0; i < cb; i++) {
       data += (char)packetBuffer[i];
     }
-Serial.println(data);
-    if(data==turnOnSignal)
-    {
-      digitalWrite(LightPin, HIGH);
-      status = true;
-    }
-    if(data==turnOffSignal)
-    {
-      digitalWrite(LightPin, LOW);
-      status = false;
-    }
+    
     if (data == sendIAmHereSiganl)
     {
       sendStationName();
       delay(1000);
       sendStationName();
+      delay(1000);
     }
     else
     {
-      char b[data.length()];
-      data.toCharArray(b, data.length());
-      Serial.println(data.length());
-      if(b[1] == 'a')
+      data = data.substring(5);
+      Serial.println(data);
+      
+      if(data==turnOnSignal)
       {
-        String str= "";
-        str += b[2];
-        str += b[3];
-        str += b[4];
-        str += b[4];
-        Serial.println(str);
-        int val = str.toInt();
-        analogWrite(LightPin, val);
+        digitalWrite(LightPin, HIGH);
+        status = true;
+      }
+      if(data==turnOffSignal)
+      {
+        digitalWrite(LightPin, LOW);
+        status = false;
+      }
+      else
+      {
+        if(data.charAt(0) == '0')
+        {
+          String str= data.substring(1);
+          Serial.println(str);
+          int val = str.toInt();
+          analogWrite(LightPin, val);
+        }
       }
     }
     
@@ -116,10 +117,12 @@ Serial.println(data);
 
 void sendStationName()
 {
+  
   Server.beginPacket(server_ip,UDPPort);
   String s = serverCommand+stationName;
   char copy[s.length()];
   s.toCharArray(copy, s.length()+1);
+  Serial.println(s);
   Server.write(copy);
   Server.endPacket();
 }
