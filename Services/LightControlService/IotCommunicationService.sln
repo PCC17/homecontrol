@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IotCommunicationService", "LightControlService\IotCommunicationService.csproj", "{B1E79921-D9D5-47CE-BA84-357B3134209D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMqSend", "RabbitMqSend\RabbitMqSend.csproj", "{AC658878-B2CD-4D00-89EE-3F1017F2F754}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMqReceive", "RabbitMqReceive\RabbitMqReceive.csproj", "{5841D27C-18A0-41AF-B7F3-41BED4F569C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1E79921-D9D5-47CE-BA84-357B3134209D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E79921-D9D5-47CE-BA84-357B3134209D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E79921-D9D5-47CE-BA84-357B3134209D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E79921-D9D5-47CE-BA84-357B3134209D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC658878-B2CD-4D00-89EE-3F1017F2F754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC658878-B2CD-4D00-89EE-3F1017F2F754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC658878-B2CD-4D00-89EE-3F1017F2F754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC658878-B2CD-4D00-89EE-3F1017F2F754}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5841D27C-18A0-41AF-B7F3-41BED4F569C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5841D27C-18A0-41AF-B7F3-41BED4F569C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5841D27C-18A0-41AF-B7F3-41BED4F569C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5841D27C-18A0-41AF-B7F3-41BED4F569C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
